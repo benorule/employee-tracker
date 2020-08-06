@@ -18,7 +18,7 @@ CREATE TABLE roles (
 );
     
 CREATE TABLE employees (
-  id INT NOT NULL,
+  id int AUTO_INCREMENT NOT NULL,
   first_name VARCHAR(30),
   last_name VARCHAR(30),
   role_id INT,
@@ -41,22 +41,22 @@ VALUES (2, "Senior Developer", 85.5, 1);
 INSERT INTO roles (role_id, title, salary, department_id)
 VALUES (3, "Manager", 75.5, 2);
 
-INSERT INTO employees (id, first_name, last_name, role_id)
-VALUES (1, "Barry", "Allen", 1);
+INSERT INTO employees (first_name, last_name, role_id)
+VALUES ("Barry", "Allen", 1);
 
-INSERT INTO employees (id, first_name, last_name, role_id)
-VALUES (2, "Peter", "Parker", 1);
+INSERT INTO employees (first_name, last_name, role_id)
+VALUES ("Peter", "Parker", 1);
 
-INSERT INTO employees (id, first_name, last_name, role_id)
-VALUES (3, "Tony", "Stark", 2);
+INSERT INTO employees (first_name, last_name, role_id)
+VALUES ("Tony", "Stark", 2);
 
-INSERT INTO employees (id, first_name, last_name, role_id)
-VALUES (4, "Bruce", "Wayne", 2);
+INSERT INTO employees (first_name, last_name, role_id)
+VALUES ("Bruce", "Wayne", 2);
 
-INSERT INTO employees (id, first_name, last_name, role_id)
-VALUES (5, "Steve", "Rogers", 3);
+INSERT INTO employees (first_name, last_name, role_id)
+VALUES ("Steve", "Rogers", 3);
 
-INSERT INTO employees (id, first_name, last_name, role_id)
-VALUES (6, "Clark", "Kent", 3);
+INSERT INTO employees (first_name, last_name, role_id)
+VALUES ("Clark", "Kent", 3);
 
 SELECT * FROM employees;
