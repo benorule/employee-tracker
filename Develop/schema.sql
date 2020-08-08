@@ -60,3 +60,5 @@ INSERT INTO employees (first_name, last_name, role_id)
 VALUES ("Clark", "Kent", 3);
 
 SELECT * FROM employees;
+
+SELECT first_name, last_name, role_id FROM employees WHERE id = 2
