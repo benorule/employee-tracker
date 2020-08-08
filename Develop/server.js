@@ -9,7 +9,7 @@ var connection = mysql.createConnection({
   database: "employeesDB"
 });
 
-connection.connect(function(err) {
+connection.connect(function (err) {
   if (err) throw err;
   runSearch();
 });
@@ -32,43 +32,43 @@ function runSearch() {
         "Delete an employee's information"
       ]
     })
-    .then(function(answer) {
+    .then(function (answer) {
       switch (answer.action) {
-      case "View an employee":
-        viewOne();
-        break;
+        case "View an employee":
+          viewOne();
+          break;
 
-      case "View all employees":
-        viewAll();
-        break;
+        case "View all employees":
+          viewAll();
+          break;
 
-      // case "View a role":
-      //   viewRole();
-      //   break;
-      
-      // case "View all roles":
-      //   viewRoles();
-      //   break;
+        // case "View a role":
+        //   viewRole();
+        //   break;
 
-      // case "View a department":
-      //   viewDepartment();
-      //   break;
-      
-      // case "View departments":
-      //   viewDepartment();
-      //   break;
+        // case "View all roles":
+        //   viewRoles();
+        //   break;
 
-      case "Add an employee":
-        addInfo();
-        break;
+        // case "View a department":
+        //   viewDepartment();
+        //   break;
 
-      case "Update an employee's information":
-        updateInfo();
-        break;
+        // case "View departments":
+        //   viewDepartment();
+        //   break;
 
-      case "Delete an employee's information":
-        deleteInfo();
-        break;
+        case "Add an employee":
+          addInfo();
+          break;
+
+        case "Update an employee's information":
+          updateInfo();
+          break;
+
+        case "Delete an employee's information":
+          deleteInfo();
+          break;
       }
     });
 }
@@ -80,9 +80,9 @@ function viewOne() {
       type: "input",
       message: "Enter employee ID: "
     })
-    .then(function(answer) {
+    .then(function (answer) {
       var query = "SELECT id, first_name, last_name, role_id FROM employees WHERE ?";
-      connection.query(query, { id: answer.id }, function(err, res) {
+      connection.query(query, { id: answer.id }, function (err, res) {
         for (var i = 0; i < res.length; i++) {
           console.log(res[i].first_name + " " + res[i].last_name + " (ID: " + res[i].id + ", Role: " + res[i].role_id + ")");
         }
@@ -93,13 +93,45 @@ function viewOne() {
 
 function viewAll() {
   var query = "SELECT * FROM employees";
-  connection.query(query, function(err, res) {
+  connection.query(query, function (err, res) {
     for (var i = 0; i < res.length; i++) {
-      console.log(res[i].first_name + " " + res[i].last_name + " (ID: " + res[i].role_id + ", Role: " + res[i].role_id + ")");
+      console.log(res[i].first_name + " " + res[i].last_name + " (ID: " + res[i].id + ", Role: " + res[i].role_id + ")");
     }
     runSearch();
   });
 }
+
+function addInfo() {
+  inquirer
+    .prompt({
+      name: "id",
+      type: "input",
+      message: "Enter employee's first name, last name, and role id number: "
+    })
+    .then(function (answer) {
+      var query = "INSERT INTO employees (first_name, last_name, role_id) VALUES ?";
+      connection.query(query, { id: answer.id }, function (err, res) {
+        console.log("Employee's information added.");
+        runSearch();
+      });
+    });
+}
+
+function deleteInfo() {
+        inquirer
+          .prompt({
+            name: "id",
+            type: "input",
+            message: "Enter employee ID: "
+          })
+          .then(function (answer) {
+            var query = "DELETE FROM employees WHERE ?";
+            connection.query(query, { id: answer.id }, function (err, res) {
+              console.log("Employee's information deleted.");
+              runSearch();
+            });
+          });
+      }
 
 // function viewRole() {
 //   inquirer
